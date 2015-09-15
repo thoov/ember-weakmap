@@ -47,3 +47,18 @@ test('has weakMap like qualities', function(assert) {
   assert.equal(map.get(a), 2);
   assert.equal(map.get(b), undefined);
 });
+
+
+test('that .has and .delete work as expected', function(assert) {
+  var map = new WeakMap();
+  var a = {};
+  var b = {};
+
+  assert.deepEqual(map.set(a, { id: 1, name: 'My file', progress: 0 }), map);
+  assert.deepEqual(map.get(a), { id: 1, name: 'My file', progress: 0 });
+  assert.ok(map.has(a));
+  assert.notOk(map.has(b));
+
+  assert.deepEqual(map.delete(a), map);
+  assert.notOk(map.has(a));
+});
