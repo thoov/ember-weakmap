@@ -3,7 +3,7 @@ import Ember from 'ember';
 var id = 0;
 
 function symbol() {
-  return `${new Date().getTime()}_${id++}`;
+  return `__ember${new Date().getTime()}_${id++}`;
 }
 
 function WeakMap() {
@@ -11,21 +11,21 @@ function WeakMap() {
 }
 
 WeakMap.prototype.get = function(obj) {
-  // var map = meta(obj).readableWeak();
-  // if (map) {
-  //   return map[this._id];
-  // }
-  var map = Ember.meta(obj);
+  var metaInfo = Ember.meta(obj);
 
-  if (map) {
-    return map[this._id];
+  if (metaInfo && metaInfo['_weak']) {
+    return metaInfo['_weak'][this._id];
   }
 };
 
 WeakMap.prototype.set = function(obj, value) {
-  // meta(obj).writableWeak()[this._id] = value;
-  // return this;
-  Ember.meta(obj)[this._id] = value;
+  var metaInfo = Ember.meta(obj);
+
+  if (!metaInfo['_weak']) {
+    metaInfo['_weak'] = {};
+  }
+
+  metaInfo['_weak'][this._id] = value;
   return this;
 };
 

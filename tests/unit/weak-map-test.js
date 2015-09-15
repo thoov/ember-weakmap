@@ -46,5 +46,4 @@ test('has weakMap like qualities', function(assert) {
   assert.equal(map.get(c), 1);
   assert.equal(map.get(a), 2);
   assert.equal(map.get(b), undefined);
-  debugger;
 });
