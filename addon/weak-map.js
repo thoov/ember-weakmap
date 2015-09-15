@@ -3,7 +3,7 @@ import Ember from 'ember';
 var id = 0;
 
 function symbol() {
-  return `__ember${new Date().getTime()}_${id++}`;
+  return `__ember${new Date().getTime()}${id++}`;
 }
 
 function WeakMap() {
