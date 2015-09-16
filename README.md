@@ -32,12 +32,14 @@ var myWeakMap = new WeakMap();
 
 ### Set
 
-`
-@method set
-@param key {Object}
-@param value {Any}
-@return {Any} stored value
-`
+```js
+/*
+ * @method set
+ * @param key {Object}
+ * @param value {Any}
+ * @return {Any} stored value
+ */
+```
 
 ```js
 var emailObj = { id: 1, subject: 'Hello World' };
@@ -49,11 +51,13 @@ The key **must be an object**.
 
 ### Get
 
-`
-@method get
-@param key {Object}
-@return {*} stored value
-`
+```js
+/*
+ * @method get
+ * @param key {Object}
+ * @return {*} stored value
+*/
+```
 
 ```js
 myWeakMap.get(emailObj); // => { read: true }
@@ -62,11 +66,13 @@ myWeakMap.get(someObjThatWasNotSet); // => undefined
 
 ### Has
 
-`
-@method has
-@param key {Object}
-@return {Boolean} if the key exists
-`
+```js
+/*
+ * @method has
+ * @param key {Object}
+ * @return {Boolean} if the key exists
+*/
+```
 
 ```js
 myWeakMap.has(emailObj); // => true
@@ -75,10 +81,12 @@ myWeakMap.has(someObjThatWasNotSet); // => false
 
 ### Delete
 
-`
-@method delete
-@param key {Object}
-`
+```js
+/*
+ * @method delete
+ * @param key {Object}
+ */
+ ```
 
 ```js
 myWeakMap.delete(emailObj);
