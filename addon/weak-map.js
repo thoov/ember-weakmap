@@ -6,19 +6,20 @@ var {
   meta
 } = Ember;
 
-var metaKey = '_weak';
 var id      = 0;
+var metaKey = '_weak';
 
 function UNDEFINED() {}
 
-function symbol() {
-  return `__ember${new Date().getTime()}${id++}`;
-}
-
 function WeakMap() {
-  this._id = symbol();
+  this._id = `__ember${new Date().getTime()}${id++}`;
 }
 
+/*
+ * @method get
+ * @param key {Object}
+ * @return {*} stored value
+ */
 WeakMap.prototype.get = function(obj) {
   var metaInfo          = meta(obj);
   var metaObject        = metaInfo[metaKey];
@@ -28,10 +29,16 @@ WeakMap.prototype.get = function(obj) {
       return undefined;
     }
 
-    return metaInfo[metaKey][this._id];
+    return metaObject[this._id];
   }
 };
 
+/*
+ * @method set
+ * @param key {Object}
+ * @param value {Any}
+ * @return {Any} stored value
+ */
 WeakMap.prototype.set = function(obj, value) {
   assert('Uncaught TypeError: Invalid value used as weak map key', typeOf(obj) === 'object');
   var metaInfo = meta(obj);
@@ -48,6 +55,11 @@ WeakMap.prototype.set = function(obj, value) {
   return this;
 };
 
+/*
+ * @method has
+ * @param key {Object}
+ * @return {Boolean} if the key exists
+ */
 WeakMap.prototype.has = function(obj) {
   var metaInfo          = meta(obj);
   var metaObject        = metaInfo[metaKey];
@@ -55,6 +67,10 @@ WeakMap.prototype.has = function(obj) {
   return (metaObject && metaObject[this._id] !== undefined);
 };
 
+/*
+ * @method delete
+ * @param key {Object}
+ */
 WeakMap.prototype.delete = function(obj) {
   var metaInfo = meta(obj);
 
