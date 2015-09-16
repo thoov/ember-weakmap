@@ -4,7 +4,7 @@ import WeakMap from 'ember-weakmap/weak-map';
 module('Ember.WeakMap');
 
 test('has weakMap like qualities', function(assert) {
-  var map  = new WeakMap();
+  var map = new WeakMap();
   var map2 = new WeakMap();
 
   var a = {};
@@ -48,17 +48,29 @@ test('has weakMap like qualities', function(assert) {
   assert.equal(map.get(b), undefined);
 });
 
+test('that error is thrown when using a non object key', function(assert) {
+  var map = new WeakMap();
+
+  assert.throws(function() {
+    map.set('a', 1);
+  }, /Uncaught TypeError: Invalid value used as weak map key/);
+});
 
 test('that .has and .delete work as expected', function(assert) {
   var map = new WeakMap();
   var a = {};
   var b = {};
+  var foo = { id: 1, name: 'My file', progress: 0 };
 
-  assert.deepEqual(map.set(a, { id: 1, name: 'My file', progress: 0 }), map);
-  assert.deepEqual(map.get(a), { id: 1, name: 'My file', progress: 0 });
+  assert.deepEqual(map.set(a, foo), map);
+  assert.deepEqual(map.get(a), foo);
   assert.ok(map.has(a));
-  assert.notOk(map.has(b));
+  assert.ok(!map.has(b));
 
   assert.deepEqual(map.delete(a), map);
-  assert.notOk(map.has(a));
+  assert.ok(!map.has(a));
+
+  map.set(a, undefined);
+  assert.ok(map.has(a));
 });
+
