@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 var {
   assert,
-  typeOf,
   meta
 } = Ember;
 
@@ -46,9 +45,8 @@ class WeakMap {
    * @return {Any} stored value
    */
   set(obj, value) {
-    assert('Uncaught TypeError: Invalid value used as weak map key', typeOf(obj) === 'object');
+    assert('Uncaught TypeError: Invalid value used as weak map key', typeof(obj) === 'object');
     var metaInfo = meta(obj);
-
     if (value === undefined) {
       value = UNDEFINED;
     }
@@ -67,8 +65,8 @@ class WeakMap {
    * @return {Boolean} if the key exists
    */
   has(obj) {
-    var metaInfo          = meta(obj);
-    var metaObject        = metaInfo[metaKey];
+    var metaInfo   = meta(obj);
+    var metaObject = metaInfo[metaKey];
 
     return (metaObject && metaObject[this._id] !== undefined);
   }
