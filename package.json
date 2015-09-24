@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "thoov/ember-weakmap",
+  "repository": "https://github.com/thoov/ember-weakmap",
   "engines": {
     "node": ">= 0.10.0"
   },
