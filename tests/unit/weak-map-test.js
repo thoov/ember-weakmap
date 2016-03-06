@@ -10,6 +10,9 @@ test('has weakMap like qualities', function(assert) {
   var a = {};
   var b = {};
   var c = {};
+  var d = function() {};
+  var e = [];
+
 
   assert.equal(map.get(a), undefined);
   assert.equal(map.get(b), undefined);
@@ -38,21 +41,41 @@ test('has weakMap like qualities', function(assert) {
   assert.equal(map2.set(a, 3), map2);
   assert.equal(map2.set(b, 4), map2);
   assert.equal(map2.set(c, 5), map2);
+  assert.equal(map2.set(d, 6), map2);
+  assert.equal(map2.set(e, 7), map2);
 
   assert.equal(map2.get(a), 3);
   assert.equal(map2.get(b), 4);
   assert.equal(map2.get(c), 5);
+  assert.equal(map2.get(d), 6);
+  assert.equal(map2.get(e), 7);
 
   assert.equal(map.get(c), 1);
   assert.equal(map.get(a), 2);
   assert.equal(map.get(b), undefined);
 });
 
-test('that error is thrown when using a non object key', function(assert) {
-  var map = new WeakMap();
+test('that error is thrown when using a primitive key', function(assert) {
+  let map = new WeakMap();
 
   assert.throws(function() {
     map.set('a', 1);
+  }, new TypeError('Invalid value used as weak map key'));
+
+  assert.throws(function() {
+    map.set(1, 1);
+  }, new TypeError('Invalid value used as weak map key'));
+
+  assert.throws(function() {
+    map.set(true, 1);
+  }, new TypeError('Invalid value used as weak map key'));
+
+  assert.throws(function() {
+    map.set(null, 1);
+  }, new TypeError('Invalid value used as weak map key'));
+
+  assert.throws(function() {
+    map.set(undefined, 1);
   }, new TypeError('Invalid value used as weak map key'));
 });
 

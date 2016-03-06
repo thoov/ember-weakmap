@@ -14,20 +14,6 @@ function symbol() {
   return `__ember${dateKey}${id++}`;
 }
 
-function isPrimitiveType(thing) {
-  switch(typeof thing) {
-    case 'string':
-    case 'boolean':
-    case 'number':
-    case 'undefined':
-    case 'null':
-    case 'symbol':
-      return true;
-    default:
-      return false;
-  }
-}
-
 class WeakMap {
   constructor() {
     this._id = symbol();
@@ -58,7 +44,8 @@ class WeakMap {
    * @return {Any} stored value
    */
   set(obj, value) {
-    if (isPrimitiveType(obj)) {
+    var type = typeof obj;
+    if (!obj || (type !== 'object' && type !== 'function')) {
       throw new TypeError('Invalid value used as weak map key');
     }
 
