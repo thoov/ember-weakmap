@@ -94,9 +94,11 @@ class WeakMap {
 
     if (this.has(obj)) {
       delete metaInfo[metaKey][this._id];
+
+      return true;
     }
 
-    return this;
+    return false;
   }
 }
 

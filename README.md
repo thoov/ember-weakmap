@@ -2,19 +2,19 @@
 
 This addon is a polyfill for the [Ember.WeakMap RFC](https://github.com/emberjs/rfcs/blob/weakmap/text/0066-template.md).
 
-A WeakMap provides a mechanism for storing and retrieving private state. The WeakMap 
-itself does not retain a reference to the state, allowing the state to be reclaimed 
+A WeakMap provides a mechanism for storing and retrieving private state. The WeakMap
+itself does not retain a reference to the state, allowing the state to be reclaimed
 when the key is reclaimed.
 
-A traditional WeakMap (and the one that will be part of the ES2015 language) allows for 
-weakness from key -> map, and also from map -> key. This allows either the Map, 
+A traditional WeakMap (and the one that will be part of the ES2015 language) allows for
+weakness from key -> map, and also from map -> key. This allows either the Map,
 or the key being reclaimed to also release the state.
 
-Unfortunately, this bi-directional weakness is problematic to polyfill. 
-Luckily, uni-directional weakness, in either direction, "just works". A polyfill 
+Unfortunately, this bi-directional weakness is problematic to polyfill.
+Luckily, uni-directional weakness, in either direction, "just works". A polyfill
 must just choose a direction.
 
-Note: Just like ES2015 WeakMap, only non null Objects can be used as keys 
+Note: Just like ES2015 WeakMap, only non null Objects can be used as keys
 
 ## Installation
 
@@ -25,7 +25,7 @@ ember install ember-weakmap
 ## Usage
 
 ```js
-import WeakMap from 'ember-weakmap/weak-map';
+import WeakMap from 'ember-weakmap';
 
 var myWeakMap = new WeakMap();
 ```

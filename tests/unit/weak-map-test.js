@@ -53,7 +53,7 @@ test('that error is thrown when using a non object key', function(assert) {
 
   assert.throws(function() {
     map.set('a', 1);
-  }, /Uncaught TypeError: Invalid value used as weak map key/);
+  }, /Invalid value used as weak map key/);
 });
 
 test('that .has and .delete work as expected', function(assert) {
@@ -67,10 +67,11 @@ test('that .has and .delete work as expected', function(assert) {
   assert.ok(map.has(a));
   assert.ok(!map.has(b));
 
-  assert.deepEqual(map.delete(a), map);
+  assert.ok(map.delete(a));
+  assert.ok(!map.delete(a));
+
   assert.ok(!map.has(a));
 
   map.set(a, undefined);
   assert.ok(map.has(a));
 });
-
