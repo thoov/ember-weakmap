@@ -53,7 +53,7 @@ test('that error is thrown when using a non object key', function(assert) {
 
   assert.throws(function() {
     map.set('a', 1);
-  }, /Invalid value used as weak map key/);
+  }, new TypeError('Invalid value used as weak map key'));
 });
 
 test('that .has and .delete work as expected', function(assert) {
