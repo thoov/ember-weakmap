@@ -18,10 +18,10 @@ class WeakMap {
   constructor(iterable = []) {
     this._id = symbol();
 
-    for (let weakmapElement of iterable) {
-      const [key, value] = weakmapElement;
+    for (let iteration of iterable) {
+      const [key, value] = iteration;
 
-      if (typeof weakmapElement !== 'object') {
+      if (typeof iteration !== 'object') {
         throw new TypeError(`Iterator value ${key} is not an entry object`);
       }
 
