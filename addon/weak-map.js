@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
-var {
+const {
   meta
 } = Ember;
 
-var id      = 0;
-var dateKey = new Date().getTime();
-var metaKey = symbol();
+let id = 0;
+const dateKey = new Date().getTime();
+const metaKey = symbol();
 
 function UNDEFINED() {}
 
@@ -15,8 +15,18 @@ function symbol() {
 }
 
 class WeakMap {
-  constructor() {
+  constructor(iterable = []) {
     this._id = symbol();
+
+    for (let iteration of iterable) {
+      const [key, value] = iteration;
+
+      if (typeof iteration !== 'object') {
+        throw new TypeError(`Iterator value ${key} is not an entry object`);
+      }
+
+      this.set(key, value);
+    }
   }
 
   /*
