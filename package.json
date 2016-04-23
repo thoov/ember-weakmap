@@ -1,6 +1,6 @@
 {
   "name": "ember-weakmap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An ES6 inspired WeakMap for Ember.JS",
   "directories": {
     "doc": "doc",
