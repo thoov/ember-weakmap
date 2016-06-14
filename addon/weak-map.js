@@ -15,18 +15,22 @@ function symbol() {
 }
 
 class WeakMap {
-  constructor(iterable = []) {
-    this._id = symbol();
+  constructor() {
 
-    for (let iteration of iterable) {
-      const [key, value] = iteration;
-
-      if (typeof iteration !== 'object') {
-        throw new TypeError(`Iterator value ${key} is not an entry object`);
-      }
-
-      this.set(key, value);
+    /*
+     * NOTE: The constructor no longer takes an
+     * [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) as
+     * an argument. This is so that the implementation mimics the internal version of ember's weakmap:
+     * https://github.com/emberjs/ember.js/blob/d801dc31a406d15b545564a60ce26d4f5e6a2a32/packages/ember-metal/lib/weak_map.js#L24-L27
+     *
+     * NOTE: Another reason is that we want to support environments where ES2015 might not be avaliable and
+     * since iterables need Symbols then we decided to drop the support for them altogether.
+     */
+    if (arguments.length) {
+      throw new Error('Invoking the WeakMap constructor with arguments is not supported at this time');
     }
+
+    this._id = symbol();
   }
 
   /*
@@ -35,8 +39,8 @@ class WeakMap {
    * @return {*} stored value
    */
   get(obj) {
-    var metaInfo   = meta(obj);
-    var metaObject = metaInfo[metaKey];
+    const metaInfo = meta(obj);
+    const metaObject = metaInfo[metaKey];
 
     if (metaInfo && metaObject) {
       if (metaObject[this._id] === UNDEFINED) {
@@ -54,12 +58,13 @@ class WeakMap {
    * @return {Any} stored value
    */
   set(obj, value) {
-    var type = typeof obj;
+    const type = typeof obj;
+
     if (!obj || (type !== 'object' && type !== 'function')) {
       throw new TypeError('Invalid value used as weak map key');
     }
 
-    var metaInfo = meta(obj);
+    const metaInfo = meta(obj);
     if (value === undefined) {
       value = UNDEFINED;
     }
@@ -78,8 +83,8 @@ class WeakMap {
    * @return {Boolean} if the key exists
    */
   has(obj) {
-    var metaInfo   = meta(obj);
-    var metaObject = metaInfo[metaKey];
+    const metaInfo   = meta(obj);
+    const metaObject = metaInfo[metaKey];
 
     return (metaObject && metaObject[this._id] !== undefined);
   }
@@ -89,7 +94,7 @@ class WeakMap {
    * @param key {Object}
    */
   delete(obj) {
-    var metaInfo = meta(obj);
+    const metaInfo = meta(obj);
 
     if (this.has(obj)) {
       delete metaInfo[metaKey][this._id];
