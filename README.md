@@ -1,6 +1,6 @@
 # Ember WeakMap
 
-This addon is a polyfill for the [Ember.WeakMap RFC](https://github.com/emberjs/rfcs/blob/weakmap/text/0066-template.md).
+This addon is a polyfill for the [Ember.WeakMap RFC](https://github.com/emberjs/rfcs/blob/master/text/0091-weakmap.md).
 
 A WeakMap provides a mechanism for storing and retrieving private state. The WeakMap
 itself does not retain a reference to the state, allowing the state to be reclaimed
