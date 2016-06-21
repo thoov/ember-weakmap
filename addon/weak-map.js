@@ -15,22 +15,19 @@ function symbol() {
 }
 
 class WeakMap {
-  constructor() {
-
-    /*
-     * NOTE: The constructor no longer takes an
-     * [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) as
-     * an argument. This is so that the implementation mimics the internal version of ember's weakmap:
-     * https://github.com/emberjs/ember.js/blob/d801dc31a406d15b545564a60ce26d4f5e6a2a32/packages/ember-metal/lib/weak_map.js#L24-L27
-     *
-     * NOTE: Another reason is that we want to support environments where ES2015 might not be avaliable and
-     * since iterables need Symbols then we decided to drop the support for them altogether.
-     */
-    if (arguments.length) {
-      throw new Error('Invoking the WeakMap constructor with arguments is not supported at this time');
-    }
-
+  constructor(iterable) {
     this._id = symbol();
+
+    if (iterable === null || iterable === undefined) {
+      return;
+    } else if (Array.isArray(iterable)) {
+      for (let i = 0; i < iterable.length; i++) {
+        let [key, value] = iterable[i];
+        this.set(key, value);
+      }
+    } else {
+      throw new TypeError('The weak map constructor polyfill only supports an array argument');
+    }
   }
 
   /*
