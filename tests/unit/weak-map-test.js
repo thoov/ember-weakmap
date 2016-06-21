@@ -90,20 +90,35 @@ test('that .has and .delete work as expected', assert => {
   assert.ok(map.has(a));
 });
 
-test('that passing an iterable to the constructor throws an error', assert => {
-  assert.expect(1);
+test('that passing an array to the constructor works', assert => {
+  assert.expect(5);
 
   const a = {};
   const b = {};
   const c = {};
   const d = {};
   const e = () => {};
+  const map = new WeakMap([[a, 'a'], [b, 'b'], [c, 'c', 'foo'], [d], [e]]);
 
-  assert.throws(() => new WeakMap([[a, 'a'], [b, 'b'], [c, 'c', 'foo'], [d], [e]]), new Error('Invoking the WeakMap constructor with arguments is not supported at this time'));
+  assert.deepEqual(map.get(a), 'a');
+  assert.deepEqual(map.get(b), 'b');
+  assert.deepEqual(map.get(c), 'c');
+  assert.deepEqual(map.get(d), undefined);
+  assert.deepEqual(map.get(e), undefined);
 });
 
 test('that passing a non iterable to the constructor throws correct error', assert => {
   assert.expect(2);
-  assert.throws(() => new WeakMap({}), new Error('Invoking the WeakMap constructor with arguments is not supported at this time'));
-  assert.throws(() => new WeakMap(() => {}), new Error('Invoking the WeakMap constructor with arguments is not supported at this time'));
+  assert.throws(() => new WeakMap('string'), new TypeError('The weak map constructor polyfill only supports an array argument'));
+  assert.throws(() => new WeakMap(() => {}), new TypeError('The weak map constructor polyfill only supports an array argument'));
+});
+
+test('that passing an array to the constructor with non object keys fails', assert => {
+  assert.expect(2);
+
+  const a = {};
+  const badKey = 'bad-key';
+
+  assert.throws(() => new WeakMap([[a, 'a'], [badKey, 'foo']]), new TypeError('Invalid value used as weak map key'));
+  assert.throws(() => new WeakMap([[]]), new TypeError('Invalid value used as weak map key'));
 });
