@@ -1,7 +1,7 @@
 {
   "name": "ember-weakmap",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "2.0.0",
+  "description": "An ES6 inspired WeakMap for Ember.JS",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "",
+  "repository": "https://github.com/thoov/ember-weakmap",
   "engines": {
     "node": ">= 0.12.0"
   },
@@ -41,7 +41,10 @@
     "loader.js": "^4.0.10"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "map",
+    "weak",
+    "weakmap"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
