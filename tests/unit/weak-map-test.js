@@ -1,13 +1,13 @@
+import Ember from 'ember';
 import { module, test } from 'qunit';
-import WeakMap from 'ember-weakmap/weak-map';
 
 module('Ember.WeakMap');
 
 test('has weakMap like qualities', assert => {
   assert.expect(32);
 
-  const map = new WeakMap();
-  const map2 = new WeakMap();
+  const map = new Ember.WeakMap();
+  const map2 = new Ember.WeakMap();
 
   const a = {};
   const b = {};
@@ -59,7 +59,7 @@ test('has weakMap like qualities', assert => {
 test('that error is thrown when using a primitive key', assert => {
   assert.expect(5);
 
-  const map = new WeakMap();
+  const map = new Ember.WeakMap();
 
   assert.throws(() => map.set('a', 1), new TypeError('Invalid value used as weak map key'));
   assert.throws(() => map.set(1, 1), new TypeError('Invalid value used as weak map key'));
@@ -71,7 +71,7 @@ test('that error is thrown when using a primitive key', assert => {
 test('that .has and .delete work as expected', assert => {
   assert.expect(8);
 
-  const map = new WeakMap();
+  const map = new Ember.WeakMap();
   const a = {};
   const b = {};
   const foo = { id: 1, name: 'My file', progress: 0 };
@@ -98,7 +98,7 @@ test('that passing an array to the constructor works', assert => {
   const c = {};
   const d = {};
   const e = () => {};
-  const map = new WeakMap([[a, 'a'], [b, 'b'], [c, 'c', 'foo'], [d], [e]]);
+  const map = new Ember.WeakMap([[a, 'a'], [b, 'b'], [c, 'c', 'foo'], [d], [e]]);
 
   assert.deepEqual(map.get(a), 'a');
   assert.deepEqual(map.get(b), 'b');
@@ -109,8 +109,8 @@ test('that passing an array to the constructor works', assert => {
 
 test('that passing a non iterable to the constructor throws correct error', assert => {
   assert.expect(2);
-  assert.throws(() => new WeakMap('string'), new TypeError('The weak map constructor polyfill only supports an array argument'));
-  assert.throws(() => new WeakMap(() => {}), new TypeError('The weak map constructor polyfill only supports an array argument'));
+  assert.throws(() => new Ember.WeakMap('string'), new TypeError('The weak map constructor polyfill only supports an array argument'));
+  assert.throws(() => new Ember.WeakMap(() => {}), new TypeError('The weak map constructor polyfill only supports an array argument'));
 });
 
 test('that passing an array to the constructor with non object keys fails', assert => {
@@ -119,6 +119,6 @@ test('that passing an array to the constructor with non object keys fails', asse
   const a = {};
   const badKey = 'bad-key';
 
-  assert.throws(() => new WeakMap([[a, 'a'], [badKey, 'foo']]), new TypeError('Invalid value used as weak map key'));
-  assert.throws(() => new WeakMap([[]]), new TypeError('Invalid value used as weak map key'));
+  assert.throws(() => new Ember.WeakMap([[a, 'a'], [badKey, 'foo']]), new TypeError('Invalid value used as weak map key'));
+  assert.throws(() => new Ember.WeakMap([[]]), new TypeError('Invalid value used as weak map key'));
 });
