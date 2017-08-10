@@ -1,7 +1,7 @@
 {
   "name": "ember-weakmap",
   "version": "2.0.0",
-  "description": "An ES6 inspired WeakMap for Ember.JS",
+  "description": "ES2015 WeakMap polyfill for Ember.JS",
   "keywords": [
     "ember-addon"
   ],
@@ -18,6 +18,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "browserslist": "^2.2.2",
     "ember-cli-babel": "^6.3.0"
   },
   "devDependencies": {

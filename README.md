@@ -25,9 +25,9 @@ ember install ember-weakmap
 ## Usage
 
 ```js
-import WeakMap from 'ember-weakmap';
+import Ember from 'ember';
 
-var myWeakMap = new WeakMap();
+const myWeakMap = new Ember.WeakMap();
 ```
 
 ### Set
@@ -42,7 +42,7 @@ var myWeakMap = new WeakMap();
 ```
 
 ```js
-var emailObj = { id: 1, subject: 'Hello World' };
+const emailObj = { id: 1, subject: 'Hello World' };
 
 myWeakMap.set(emailObj, {read: true});
 ```
