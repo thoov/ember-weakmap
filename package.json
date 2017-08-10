@@ -1,9 +1,13 @@
 {
   "name": "ember-weakmap",
   "version": "2.0.0",
-  "description": "ES2015 WeakMap polyfill for Ember.JS",
+  "description": "ES2015 WeakMap polyfill for Ember.WeakMap",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "polyfill",
+    "weakmap",
+    "ember",
+    "emberjs"
   ],
   "license": "MIT",
   "author": "Travis Hoover <thoov7@gmail.com>",
