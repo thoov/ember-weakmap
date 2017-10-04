@@ -39,9 +39,7 @@ const myWeakMap = new Ember.WeakMap();
  * @param value {Any}
  * @return {Any} stored value
  */
-```
-
-```js
+ 
 const emailObj = { id: 1, subject: 'Hello World' };
 
 myWeakMap.set(emailObj, {read: true});
@@ -57,9 +55,7 @@ The key **must be an object**.
  * @param key {Object}
  * @return {*} stored value
 */
-```
 
-```js
 myWeakMap.get(emailObj); // => { read: true }
 myWeakMap.get(someObjThatWasNotSet); // => undefined
 ```
@@ -72,9 +68,7 @@ myWeakMap.get(someObjThatWasNotSet); // => undefined
  * @param key {Object}
  * @return {Boolean} if the key exists
 */
-```
 
-```js
 myWeakMap.has(emailObj); // => true
 myWeakMap.has(someObjThatWasNotSet); // => false
 ```
@@ -86,9 +80,7 @@ myWeakMap.has(someObjThatWasNotSet); // => false
  * @method delete
  * @param key {Object}
  */
- ```
 
-```js
 myWeakMap.delete(emailObj);
 myWeakMap.get(emailObj); // => undefined
 myWeakMap.has(emailObj); // false
