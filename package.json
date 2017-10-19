@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "browserslist": "^2.2.2",
+    "debug": "^3.1.0",
     "ember-cli-babel": "^6.3.0"
   },
   "devDependencies": {
