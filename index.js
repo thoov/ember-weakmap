@@ -47,6 +47,9 @@ module.exports = {
           needsPolyfill = true;
         }
       });
+    } else {
+      debug(`target browsers was not found. including polyfill as a fallback.`);
+      needsPolyfill = true;
     }
 
     if (needsPolyfill) {
