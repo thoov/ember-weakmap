@@ -1,7 +1,9 @@
-/* globals Ember, require*/
+/* globals Ember, require */
 
 (function() {
   var _Ember;
+  var id = 0;
+  var dateKey = new Date().getTime();
 
   if (typeof Ember !== 'undefined') {
     _Ember = Ember;
@@ -9,41 +11,38 @@
     _Ember = require('ember').default;
   }
 
+  function symbol() {
+    return '__ember' + dateKey + id++;
+  }
+
+  function UNDEFINED() {}
+  
+  function FakeWeakMap(iterable) {
+    this._id = symbol();
+
+    if (iterable === null || iterable === undefined) {
+      return;
+    } else if (Array.isArray(iterable)) {
+      for (var i = 0; i < iterable.length; i++) {
+        var key = iterable[i][0];
+        var value = iterable[i][1];
+        this.set(key, value);
+      }
+    } else {
+      throw new TypeError('The weak map constructor polyfill only supports an array argument');
+    }
+  }
+  
   if (!_Ember.WeakMap) {
     var meta = _Ember.meta;
-    var id = 0;
-    var dateKey = new Date().getTime();
-
-    function symbol() { // eslint-disable-line no-inner-declarations
-      return '__ember' + dateKey + id++;
-    }
-
     var metaKey = symbol();
-
-    function UNDEFINED() {} // eslint-disable-line no-inner-declarations
-
-    function WeakMap(iterable) { // eslint-disable-line no-inner-declarations
-      this._id = symbol();
-
-      if (iterable === null || iterable === undefined) {
-        return;
-      } else if (Array.isArray(iterable)) {
-        for (var i = 0; i < iterable.length; i++) {
-          var key = iterable[i][0];
-          var value = iterable[i][1];
-          this.set(key, value);
-        }
-      } else {
-        throw new TypeError('The weak map constructor polyfill only supports an array argument');
-      }
-    }
 
     /*
      * @method get
      * @param key {Object}
      * @return {*} stored value
      */
-    WeakMap.prototype.get = function(obj) {
+    FakeWeakMap.prototype.get = function(obj) {
       var metaInfo = meta(obj);
       var metaObject = metaInfo[metaKey];
 
@@ -62,7 +61,7 @@
      * @param value {Any}
      * @return {Any} stored value
      */
-    WeakMap.prototype.set = function(obj, value) {
+    FakeWeakMap.prototype.set = function(obj, value) {
       var type = typeof obj;
 
       if (!obj || (type !== 'object' && type !== 'function')) {
@@ -87,7 +86,7 @@
      * @param key {Object}
      * @return {Boolean} if the key exists
      */
-    WeakMap.prototype.has = function(obj) {
+    FakeWeakMap.prototype.has = function(obj) {
       var metaInfo   = meta(obj);
       var metaObject = metaInfo[metaKey];
 
@@ -98,7 +97,7 @@
      * @method delete
      * @param key {Object}
      */
-    WeakMap.prototype.delete = function(obj) {
+    FakeWeakMap.prototype.delete = function(obj) {
       var metaInfo = meta(obj);
 
       if (this.has(obj)) {
@@ -110,6 +109,10 @@
       return false;
     }
 
-    _Ember.WeakMap = WeakMap;
+    if (typeof WeakMap === 'function') {
+      _Ember.WeakMap = WeakMap;
+    } else {
+      _Ember.WeakMap = FakeWeakMap;
+    }
   }
 })();
