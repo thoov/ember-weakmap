@@ -8,7 +8,7 @@
   } else {
     _Ember = require('ember').default;
   }
-   
+
   if (!_Ember.WeakMap) {
     if (typeof WeakMap === 'function') {
       _Ember.WeakMap = WeakMap;
