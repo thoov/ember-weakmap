@@ -21,6 +21,15 @@
     {{content-for "body"}}
     {{content-for "test-body"}}
 
+    <script>
+      /*
+        The polyfill will not be included if window.WeakMap is detected so
+        here we just remove it so that during tests we force the polyfill to
+        be used.
+      */
+      delete window.WeakMap;
+    </script>
+
     <script src="/testem.js" integrity=""></script>
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/test-support.js"></script>

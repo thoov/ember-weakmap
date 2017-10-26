@@ -109,6 +109,11 @@ test('that passing an array to the constructor works', assert => {
 
 test('that passing a non iterable to the constructor throws correct error', assert => {
   assert.expect(2);
+
+  /*
+   Embers internal weakmap has this type check so we test that the polyfill does as well.
+   https://github.com/emberjs/ember.js/blob/0b190028c0fa0840175a1cd3dc2d2d9e4cadc275/packages/ember-metal/lib/weak_map.js#L40
+  */
   assert.throws(() => new Ember.WeakMap('string'), new TypeError('The weak map constructor polyfill only supports an array argument'));
   assert.throws(() => new Ember.WeakMap(() => {}), new TypeError('The weak map constructor polyfill only supports an array argument'));
 });
