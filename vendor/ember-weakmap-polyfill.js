@@ -10,6 +10,11 @@
   }
 
   if (!_Ember.WeakMap) {
+    if (typeof WeakMap === 'function') {
+      _Ember.WeakMap = WeakMap;
+      return;
+    }
+    
     var meta = _Ember.meta;
     var id = 0;
     var dateKey = new Date().getTime();
@@ -21,7 +26,7 @@
       return '__ember' + dateKey + id++;
     }
 
-    function WeakMap(iterable) { // eslint-disable-line no-inner-declarations
+    function FakeWeakMap(iterable) { // eslint-disable-line no-inner-declarations
       this._id = symbol();
 
       if (iterable === null || iterable === undefined) {
@@ -42,7 +47,7 @@
      * @param key {Object}
      * @return {*} stored value
      */
-    WeakMap.prototype.get = function(obj) {
+    FakeWeakMap.prototype.get = function(obj) {
       var metaInfo = meta(obj);
       var metaObject = metaInfo[metaKey];
 
@@ -61,7 +66,7 @@
      * @param value {Any}
      * @return {Any} stored value
      */
-    WeakMap.prototype.set = function(obj, value) {
+    FakeWeakMap.prototype.set = function(obj, value) {
       var type = typeof obj;
 
       if (!obj || (type !== 'object' && type !== 'function')) {
@@ -86,7 +91,7 @@
      * @param key {Object}
      * @return {Boolean} if the key exists
      */
-    WeakMap.prototype.has = function(obj) {
+    FakeWeakMap.prototype.has = function(obj) {
       var metaInfo   = meta(obj);
       var metaObject = metaInfo[metaKey];
 
@@ -97,7 +102,7 @@
      * @method delete
      * @param key {Object}
      */
-    WeakMap.prototype.delete = function(obj) {
+    FakeWeakMap.prototype.delete = function(obj) {
       var metaInfo = meta(obj);
 
       if (this.has(obj)) {
@@ -109,6 +114,6 @@
       return false;
     }
 
-    _Ember.WeakMap = WeakMap;
+    _Ember.WeakMap = FakeWeakMap;
   }
 })();
