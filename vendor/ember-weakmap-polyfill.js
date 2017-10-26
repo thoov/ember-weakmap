@@ -13,13 +13,14 @@
     var meta = _Ember.meta;
     var id = 0;
     var dateKey = new Date().getTime();
-    var metaKey = symbol();
-
-    function UNDEFINED() {} // eslint-disable-line no-inner-declarations
 
     function symbol() { // eslint-disable-line no-inner-declarations
       return '__ember' + dateKey + id++;
     }
+
+    var metaKey = symbol();
+
+    function UNDEFINED() {} // eslint-disable-line no-inner-declarations
 
     function WeakMap(iterable) { // eslint-disable-line no-inner-declarations
       this._id = symbol();
