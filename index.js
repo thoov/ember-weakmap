@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 const debug = require('debug')('weakmap');
