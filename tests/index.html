@@ -27,7 +27,7 @@
         here we just remove it so that during tests we force the polyfill to
         be used.
       */
-      delete window.WeakMap;
+      window.OVERRIDE_WEAKMAP = true;
     </script>
 
     <script src="/testem.js" integrity=""></script>
