@@ -16,7 +16,7 @@
   }
 
   function UNDEFINED() {}
-  
+
   function FakeWeakMap(iterable) {
     this._id = symbol();
 
@@ -32,7 +32,7 @@
       throw new TypeError('The weak map constructor polyfill only supports an array argument');
     }
   }
-  
+
   if (!_Ember.WeakMap) {
     var meta = _Ember.meta;
     var metaKey = symbol();
@@ -109,7 +109,7 @@
       return false;
     }
 
-    if (typeof WeakMap === 'function') {
+    if (typeof WeakMap === 'function' && window.OVERRIDE_WEAKMAP !== true) {
       _Ember.WeakMap = WeakMap;
     } else {
       _Ember.WeakMap = FakeWeakMap;
