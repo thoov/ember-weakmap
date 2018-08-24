@@ -30,6 +30,8 @@ module.exports = {
   name: 'ember-weakmap',
 
   included() {
+    this._super.included.apply(this, arguments);
+    
     this._ensureThisImport();
     const targets = this.project.targets;
     let needsPolyfill = false;
