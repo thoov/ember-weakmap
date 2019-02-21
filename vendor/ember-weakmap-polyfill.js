@@ -109,7 +109,7 @@
       return false;
     }
 
-    if (typeof WeakMap === 'function' && window.OVERRIDE_WEAKMAP !== true) {
+    if (typeof WeakMap === 'function' && typeof window !== 'undefined' && window.OVERRIDE_WEAKMAP !== true) {
       _Ember.WeakMap = WeakMap;
     } else {
       _Ember.WeakMap = FakeWeakMap;
